@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const categories = ["Tous", "Objets", "Appartements", "Hôtels & restaurants"];
+
+  const filters = document.querySelector(".filter-buttons");
+
+  categories.forEach((category) => {
+    const button = document.createElement("button");
+
+    button.classList.add("filter-button");
+
+    button.textContent = category;
+
+    filters.appendChild(button);
+  });
+
   const gallery = document.querySelector(".gallery");
 
   async function getWorks() {
