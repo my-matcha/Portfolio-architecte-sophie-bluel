@@ -209,6 +209,8 @@ li:hover {
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin-top: 51px;
+  margin-bottom: 51px;
 }
 
 .filter-button {
@@ -221,7 +223,6 @@ li:hover {
   border-radius: 60px;
   padding: 9px 15px;
   gap: 10px;
-  margin-bottom: 51px;
 }
 
 .gallery {
