@@ -1,76 +1,38 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const categories = ["Tous", "Objets", "Appartements", "Hôtels & restaurants"];
+const categories = ["Tous", "Objets", "Appartements", "Hôtels & restaurants"];
+const filters = document.querySelector(".filter-buttons");
 
-  const filters = document.querySelector(".filter-buttons");
+categories.forEach((category) => {
+  const button = document.createElement("button");
+  console.log(button);
 
-  categories.forEach((category) => {
-    const button = document.createElement("button");
+  button.classList.add("filter-button");
 
-    button.classList.add("filter-button");
+  button.textContent = category;
 
-    button.textContent = category;
-
-    filters.appendChild(button);
-  });
-
-  const gallery = document.querySelector(".gallery");
-
-  async function getWorks() {
-    const response = await fetch("http://localhost:5678/api/works");
-    const works = await response.json();
-
-    works.forEach((work) => {
-      const figure = document.createElement("figure");
-
-      const image = document.createElement("img");
-      image.src = work.imageUrl;
-      image.alt = work.title;
-
-      const caption = document.createElement("figcaption");
-      caption.textContent = work.title;
-
-      figure.appendChild(image);
-      figure.appendChild(caption);
-
-      gallery.appendChild(figure);
-    });
-  }
-
-  getWorks();
+  filters.appendChild(button);
 });
 
-// const categories = [
-//   {
-//     id: 1,
-//     name: "Landscape",
-//   },
-//   {
-//     id: 2,
-//     name: "Portrait",
-//   },
-//   {
-//     id: 3,
-//     name: "Accomodation",
-//   },
-// ];
+const gallery = document.querySelector(".gallery");
 
-// const works = [
-//   {
-//     id: 1,
-//     title: "Landscape",
-//     image: "assets/landscape.jpg",
-//     categoryId: 1,
-//   },
-//   {
-//     id: 2,
-//     title: "Portrait",
-//     image: "assets/portrait.jpg",
-//     categoryId: 2,
-//   },
-//   {
-//     id: 3,
-//     title: "Accomodation",
-//     image: "assets/accomodation.jpg",
-//     categoryId: 3,
-//   },
-// ];
+async function getWorks() {
+  const response = await fetch("http://localhost:5678/api/works");
+  const works = await response.json();
+
+  works.forEach((work) => {
+    const figure = document.createElement("figure");
+
+    const image = document.createElement("img");
+    image.src = work.imageUrl;
+    image.alt = work.title;
+
+    const caption = document.createElement("figcaption");
+    caption.textContent = work.title;
+
+    figure.appendChild(image);
+    figure.appendChild(caption);
+
+    gallery.appendChild(figure);
+  });
+}
+
+getWorks();
