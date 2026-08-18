@@ -3,8 +3,9 @@ import { loadWorks } from "./api/work.js";
 import { displayWorks } from "./ui/gallery.js";
 import { createWorkState } from "./models/workState.js";
 import { displayFilters } from "./ui/filter.js";
+import { createCategoryState } from "./models/categoryState.js";
 
-let categories = [{ id: null, name: "Tous" }];
+let categoryState;
 let workState;
 
 // Exemple d'orchestration par main.js pour l'affichage des filtres avec un callback pour être prévenu de quand une catégorie est cliquée
@@ -19,12 +20,16 @@ let workState;
 
 async function init() {
   const apiCategories = await loadCategories();
-  categories = [...categories, ...apiCategories];
+
+  categoryState = createCategoryState([
+    { id: null, name: "Tous" },
+    ...apiCategories,
+  ]);
 
   workState = createWorkState(await loadWorks());
 
   displayWorks(workState.all());
-  displayFilters(categories, (categoryId) => {
+  displayFilters(categoryState.all(), (categoryId) => {
     displayWorks(workState.fromCategory(categoryId));
   });
 }
