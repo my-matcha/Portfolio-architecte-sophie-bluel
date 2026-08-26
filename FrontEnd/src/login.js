@@ -8,6 +8,18 @@ form.addEventListener("submit", async (event) => {
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
 
-  console.log(email);
-  console.log(password);
+  const response = await fetch(`${BASE_URL}/users/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    }),
+  });
+
+  const data = await response.json();
+
+  console.log(data);
 });
