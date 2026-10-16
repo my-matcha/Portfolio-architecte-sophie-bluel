@@ -340,3 +340,9 @@ footer nav ul {
   text-align: center;
   color: #000;
 }
+
+.login-error {
+  color: red;
+  text-align: center;
+  padding-top: 20px;
+}
