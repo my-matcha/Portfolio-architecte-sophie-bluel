@@ -43,8 +43,6 @@ titre.addEventListener("click", function (event) {
 // Différentes écritures d'une fonction
 
 // Classique
-function A()
-
 // Fonction nommée. Ici la fonction s'appelle "addition"
 function addition(n1, n2) {
   return n1 + n2;
@@ -91,12 +89,10 @@ addition = (a, b) => {
 // Si une seule instruction dans le corps de la fonction, le return est implicite (on enlève les accolades)
 addition = (a, b) => a + b;
 
-
-
-Mes exercices :
+// Mes exercices :
 // 1. Création de variables
 const age = 25;
-const nom = "Sabine"
+const nom = "Sabine";
 console.log(age, nom);
 
 //2. Création de types primitifs
@@ -106,61 +102,68 @@ const vraiOufaux = true; // ou false
 const vide = null;
 
 //3. Création d'un objet
-const personnage = {
-  nom: "Sabine",
-  vie: 25,
-  estVivant: true,
-}
+let personnage = {
+  // Stockage de l'objet à l'adresse B
+  nom: "Sabine", // Référence vers une autre adresse, C
+  vie: 25, // Référence vers une autre adresse, D
+  estVivant: true, // Référence vers une autre adresse, E
+};
 
-//4. Création d'une fonction 
-function soustraction(n1, n2){
+// Boite NOM de valeur Sabine à l'adresse C
+// Boite VIE de valeur 25 à l'adresse D
+// Boite ESTVIVANT de valeur true à l'adresse E
+
+console.log(une_variable); // undefined
+
+//4. Création d'une fonction
+function soustraction(n1, n2) {
   return n1 - n2;
 }
 
-soustraction = (n1,n2) => n1 - n2;
+soustraction = (n1, n2) => n1 - n2;
 
-function direBienvenue(prenom){
-  console.log ("Bienvenue " + prenom);
+function direBienvenue(prenom) {
+  console.log("Bienvenue " + prenom);
 }
 
 //5. Mélanger les notions
 const chien = {
   nom: "Volt",
-  aboyer: function() {
+  aboyer: function () {
     console.log("Wouf");
-  }
+  },
 };
 chien.aboyer();
 
-const personnage = [nom, vie, estVivant];
+personnage = [nom, vie, estVivant];
 
-console.log (personnage [0], personnage [1], personnage [2]);
+console.log(personnage[0], personnage[1], personnage[2]);
 
-
-//6. Écriture de fonctions 
-function carre(n){
-  return n*n;
+//6. Écriture de fonctions
+function carre(n) {
+  return n * n;
 }
 
-carre = (n) => n*n;
+carre = (n) => n * n;
 
-carre = n => n*n;
+carre = (n) => n * n;
 
-const calculatrice = { 
-  addition (a,b) {
+const calculatrice = {
+  addition(a, b) {
     return a + b;
   },
-  soustraction (a,b) {
+  soustraction(a, b) {
     return a - b;
-  }
-}
-console.log(calculatrice.addition(1,2), calculatrice.soustraction(1,2));
+  },
+};
+console.log(calculatrice.addition(1, 2), calculatrice.soustraction(1, 2));
 
-function (Sabine){
-  return "Salut " + Sabine;
-}
-console.log("Salut " + Sabine);
+const salutation = function (firstname) {
+  return "Salut " + firstname;
+};
 
-document.addEventListener("click", function() {
+console.log(salutation("Sabine"));
+
+document.addEventListener("click", function () {
   console.log("Tu as cliqué !");
-}
+});

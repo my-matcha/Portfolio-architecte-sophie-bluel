@@ -4,6 +4,7 @@
 // On va chercher la variable BASE_URL dans un autre fichier (api/baseUrl.js).
 // Elle contient l'adresse du serveur qui est "http://localhost:5678/api"
 import BASE_URL from "./api/baseUrl.js";
+import login from "./api/login.js";
 
 // ------------------------------------------------------
 // 2. SÉLECTION DES ÉLÉMENTS HTML
