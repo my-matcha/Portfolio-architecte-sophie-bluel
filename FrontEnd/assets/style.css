@@ -346,3 +346,51 @@ footer nav ul {
   text-align: center;
   padding-top: 20px;
 }
+
+[hidden] {
+  display: none !important;
+}
+
+.edit-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  color: white;
+  padding: 20px;
+  font-family:
+    "Work Sans",
+    sans serif;
+}
+
+.edit-banner p {
+  margin: 0;
+}
+
+.projects-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 31px;
+}
+
+.projects-title h2 {
+  margin-right: 0;
+}
+
+.edit-button {
+  display: flex;
+  align-items: center;
+  font-family:
+    "Work Sans",
+    sans serif;
+  font-size: 14px;
+  color: #000;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-button: hover {
+  text-decoration: underline;
+}

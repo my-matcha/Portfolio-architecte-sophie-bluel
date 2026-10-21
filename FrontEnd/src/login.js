@@ -4,7 +4,6 @@
 // On va chercher la variable BASE_URL dans un autre fichier (api/baseUrl.js).
 // Elle contient l'adresse du serveur qui est "http://localhost:5678/api"
 import BASE_URL from "./api/baseUrl.js";
-import login from "./api/login.js";
 
 // ------------------------------------------------------
 // 2. SÉLECTION DES ÉLÉMENTS HTML
@@ -57,12 +56,18 @@ form.addEventListener("submit", async (event) => {
       return;
     }
 
+    // ------------------------------------------------------
+    // 7. CAS DE SUCCÈS : connexion réussie
+    // ------------------------------------------------------
     const data = await response.json();
     localStorage.setItem("token", data.token);
 
     // redirection vers la page d'accueil après une connexion réussie
     window.location.href = "index.html";
   } catch (error) {
+    // ───────────────────────────────────────
+    // 8. CAS DE PANNE : problème technique
+    // ───────────────────────────────────────
     errorMessage.textContent =
       "Une erreur est survenue. Veuillez réessayer plus tard.";
     console.error("Erreur lors de la connexion :", error);
