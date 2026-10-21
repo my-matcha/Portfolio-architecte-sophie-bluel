@@ -9,16 +9,6 @@ import { setupEditMode } from "./ui/editMode.js";
 let categoryState;
 let workState;
 
-// Exemple d'orchestration par main.js pour l'affichage des filtres avec un callback pour être prévenu de quand une catégorie est cliquée
-// filterUI.init(categories, function(category_id) {
-//   displayWorks(workState.fromCategory(category_id));
-// });
-
-// filterUI.init(categories);
-// filterUI.onCategorySelected(function(category_id) {
-//   displayWorks(workState.fromCategory(category_id));
-// })
-
 async function init() {
   const isLoggedIn = setupEditMode();
 

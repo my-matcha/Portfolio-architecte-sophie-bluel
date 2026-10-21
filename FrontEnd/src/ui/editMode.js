@@ -12,9 +12,10 @@ export function setupEditMode() {
   document.querySelector("#edit-button").hidden = false;
 
   // "login" devient "logout" et on supprime le token du localStorage quand on clique dessus
-  const loginLink = document.querySelector("#login-link");
-  loginLink.textContent = "logout";
-  loginLink.addEventListener("click", (event) => {
+  const logoutLink = document.querySelector("#login-link");
+
+  logoutLink.textContent = "logout";
+  logoutLink.addEventListener("click", (event) => {
     event.preventDefault();
     localStorage.removeItem("token");
     window.location.reload();
