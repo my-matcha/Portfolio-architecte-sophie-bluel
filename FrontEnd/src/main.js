@@ -14,12 +14,10 @@ let workState;
 // on supprime le token, puis on remet l'affichage visiteur (sans recharger la page)
 function handleLogout() {
   logout();
-  displayEditMode(isAuthenticated(), handleLogout);
+  displayEditMode(false);
 }
 
 async function init() {
-  displayEditMode(isAuthenticated(), handleLogout);
-
   const apiCategories = await loadCategories();
 
   categoryState = createCategoryState([
@@ -31,12 +29,11 @@ async function init() {
 
   displayWorks(workState.all());
 
-  // Les filtres ne s'affichent que pour les visiteurs connectés (mode édition)
-  if (!isLoggedIn) {
-    displayFilters(categoryState.all(), (categoryId) => {
-      displayWorks(workState.fromCategory(categoryId));
-    });
-  }
+  displayFilters(categoryState.all(), (categoryId) => {
+    displayWorks(workState.fromCategory(categoryId));
+  });
+
+  displayEditMode(isAuthenticated(), handleLogout);
 }
 
 init();

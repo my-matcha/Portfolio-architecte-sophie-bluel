@@ -391,6 +391,6 @@ footer nav ul {
   cursor: pointer;
 }
 
-.edit-button: hover {
+.edit-button hover {
   text-decoration: underline;
 }

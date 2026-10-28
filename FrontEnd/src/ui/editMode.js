@@ -1,20 +1,36 @@
 // Affiche ou masque le mode édition.
 // isEditMode : true pour afficher le mode édition, false pour le masquer.
 // onLogout : fonction à appeler quand l'utilisatrice se déconnecte (clic sur "logout").
-export function displayEditMode(isEditMode, onLogout) {
+
+let onLogoutCallback = function() {}
+
+function onLogout(event) {
+  event.preventDefault();
+  console.log('EVENEMENT CLICK SUR LOGOUT LINK')
+  onLogoutCallback();
+}
+
+export function displayEditMode(isEditMode, callback) {
+  if (callback) onLogoutCallback = callback;
+
   // Le bandeau noir et le bouton "modifier" : visibles seulement en mode édition
-  document.querySelector("#edit-banner").hidden = !isEditMode;
-  document.querySelector("#edit-button").hidden = !isEditMode;
-  document.querySelector("#filter-buttons").hidden = isEditMode;
+  const editBannerElement = document.querySelector("#edit-banner"),
+    editButtonElement = document.querySelector("#edit-button"),
+    filterButtonsElement = document.querySelector("#filter-buttons");
+
+  editBannerElement.hidden = !isEditMode;
+  editButtonElement.hidden = !isEditMode;
+  
+  if (filterButtonsElement)
+    filterButtonsElement.hidden = isEditMode;
 
   const loginLink = document.querySelector("#login-link");
 
   if (isEditMode) {
     loginLink.textContent = "logout";
-    loginLink.onclick = (event) => {
-      event.preventDefault(); // on reste sur la page au lieu d'aller sur login.html
-      onLogout(); // on prévient main.js que l'utilisatrice veut se déconnecter
-    };
+    
+    loginLink.removeEventListener("click", onLogout) // On évite que plusieurs évènements se lancent
+    loginLink.addEventListener("click", onLogout);
   } else {
     loginLink.textContent = "login";
     loginLink.onclick = null; // le lien redirige normalement vers login.html
