@@ -3,7 +3,7 @@
 // ------------------------------------------------------
 // On va chercher la variable BASE_URL dans un autre fichier (api/baseUrl.js).
 // Elle contient l'adresse du serveur qui est "http://localhost:5678/api"
-import BASE_URL from "./api/baseUrl.js";
+import { login } from "./api/auth.js";
 
 // ------------------------------------------------------
 // 2. SÉLECTION DES ÉLÉMENTS HTML
@@ -30,28 +30,16 @@ form.addEventListener("submit", async (event) => {
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
 
-  // ------------------------------------------------------
-  // 5. ENVOYER LES DONNÉES À L'API
-  // ------------------------------------------------------
-  // On utilise fetch() pour envoyer une requête HTTP à l'API.
-  // On utilise try/catch pour gérer les erreurs qui peuvent arriver lors de la requête.
-  // On utilise await pour attendre la réponse de l'API avant de continuer.
   try {
-    const response = await fetch(`${BASE_URL}/users/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
+    // ------------------------------------------------------
+    // 5. APPELER L'API (via api/login.js)
+    // ------------------------------------------------------
+    const data = await login(email, password);
 
     // ------------------------------------------------------
     // 6. CAS D'ERREUR : identifiant ou mot de passe incorrect
     // ------------------------------------------------------
-    if (!response.ok) {
+    if (!data) {
       errorMessage.textContent = "Erreur dans l'identifiant ou le mot de passe";
       return;
     }
@@ -59,10 +47,7 @@ form.addEventListener("submit", async (event) => {
     // ------------------------------------------------------
     // 7. CAS DE SUCCÈS : connexion réussie
     // ------------------------------------------------------
-    const data = await response.json();
-    localStorage.setItem("token", data.token);
-
-    // redirection vers la page d'accueil après une connexion réussie
+    // Le token a déjà été stocké dans le localStorage par la fonction login() de api/auth.js
     window.location.href = "index.html";
   } catch (error) {
     // ───────────────────────────────────────

@@ -4,13 +4,21 @@ import { displayWorks } from "./ui/gallery.js";
 import { createWorkState } from "./models/workState.js";
 import { displayFilters } from "./ui/filter.js";
 import { createCategoryState } from "./models/categoryState.js";
-import { setupEditMode } from "./ui/editMode.js";
+import { isAuthenticated, logout } from "./api/auth.js";
+import { displayEditMode } from "./ui/editMode.js";
 
 let categoryState;
 let workState;
 
+// Appelée quand on clique sur "logout" :
+// on supprime le token, puis on remet l'affichage visiteur (sans recharger la page)
+function handleLogout() {
+  logout();
+  displayEditMode(isAuthenticated(), handleLogout);
+}
+
 async function init() {
-  const isLoggedIn = setupEditMode();
+  displayEditMode(isAuthenticated(), handleLogout);
 
   const apiCategories = await loadCategories();
 

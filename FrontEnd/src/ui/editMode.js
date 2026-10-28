@@ -1,25 +1,22 @@
-// Affiche les élements d'édition si l'utilsatrice est connectée.
-// Retourne true si elle est connectée, false sinon.
-export function setupEditMode() {
-  const token = localStorage.getItem("token");
+// Affiche ou masque le mode édition.
+// isEditMode : true pour afficher le mode édition, false pour le masquer.
+// onLogout : fonction à appeler quand l'utilisatrice se déconnecte (clic sur "logout").
+export function displayEditMode(isEditMode, onLogout) {
+  // Le bandeau noir et le bouton "modifier" : visibles seulement en mode édition
+  document.querySelector("#edit-banner").hidden = !isEditMode;
+  document.querySelector("#edit-button").hidden = !isEditMode;
+  document.querySelector("#filter-buttons").hidden = isEditMode;
 
-  if (!token) {
-    return false;
+  const loginLink = document.querySelector("#login-link");
+
+  if (isEditMode) {
+    loginLink.textContent = "logout";
+    loginLink.onclick = (event) => {
+      event.preventDefault(); // on reste sur la page au lieu d'aller sur login.html
+      onLogout(); // on prévient main.js que l'utilisatrice veut se déconnecter
+    };
+  } else {
+    loginLink.textContent = "login";
+    loginLink.onclick = null; // le lien redirige normalement vers login.html
   }
-
-  // On révèle les éléments d'édition si l'utilisatrice est connectée (cachés par défaut dans le HTML avec l'attribut hidden)
-  document.querySelector("#edit-banner").hidden = false;
-  document.querySelector("#edit-button").hidden = false;
-
-  // "login" devient "logout" et on supprime le token du localStorage quand on clique dessus
-  const logoutLink = document.querySelector("#login-link");
-
-  logoutLink.textContent = "logout";
-  logoutLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    localStorage.removeItem("token");
-    window.location.reload();
-  });
-
-  return true;
 }
