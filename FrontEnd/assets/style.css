@@ -394,3 +394,71 @@ footer nav ul {
 .edit-button hover {
   text-decoration: underline;
 }
+
+/*Background overlay for modal*/
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+/*La boîte blanche au centre*/
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  width: min(630px, 90%);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+/*Boutons x et flèche gauche en haut de la boîte*/
+.modal-close,
+.modal-back {
+  position: absolute;
+  top: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-close {
+  right: 1rem;
+}
+.modal-back {
+  left: 1rem;
+}
+
+/*Grille des minaitures*/
+.modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.modal-work {
+  position: relative;
+  margin: 0;
+}
+
+.modal-work img {
+  width: 100%;
+  display: block;
+}
+
+/* Bouton poubelle sur chaque miniature */
+.modal-delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
