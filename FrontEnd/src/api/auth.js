@@ -18,12 +18,12 @@ export async function login(email, password) {
   });
 
   if (!response.ok) {
-    return false;
+    throw new Error("Erreur lors de la connexion"); // au lieu de retourner false, on lève une erreur pour que le code appelant puisse la gérer
   }
 
   const data = await response.json();
   localStorage.setItem(TOKEN_KEY, data.token);
-  return true;
+  // plus de return : la fonction ne renvoie rien
 }
 
 export function logout() {

@@ -34,24 +34,16 @@ form.addEventListener("submit", async (event) => {
     // ------------------------------------------------------
     // 5. APPELER L'API (via api/login.js)
     // ------------------------------------------------------
-    const data = await login(email, password);
+    await login(email, password);
 
     // ------------------------------------------------------
-    // 6. CAS D'ERREUR : identifiant ou mot de passe incorrect
+    // 6. CAS DE SUCCÈS : connexion réussie
     // ------------------------------------------------------
-    if (!data) {
-      errorMessage.textContent = "Erreur dans l'identifiant ou le mot de passe";
-      return;
-    }
-
-    // ------------------------------------------------------
-    // 7. CAS DE SUCCÈS : connexion réussie
-    // ------------------------------------------------------
-    // Le token a déjà été stocké dans le localStorage par la fonction login() de api/auth.js
+    // Le token a déjà été stocké par login(), on redirige simplement.
     window.location.href = "index.html";
   } catch (error) {
     // ───────────────────────────────────────
-    // 8. CAS DE PANNE : problème technique
+    // 7. CAS D'ÉCHEC : identifiant ou mot de passe incorrect
     // ───────────────────────────────────────
     errorMessage.textContent =
       "Une erreur est survenue. Veuillez réessayer plus tard.";
