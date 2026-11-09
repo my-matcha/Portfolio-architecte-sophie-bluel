@@ -10,14 +10,21 @@ import { displayEditMode } from "./ui/editMode.js";
 let categoryState;
 let workState;
 
-// Appelée quand on clique sur "logout" :
-// on supprime le token, puis on remet l'affichage visiteur (sans recharger la page)
-function handleLogout() {
-  logout();
-  displayEditMode(false);
+// Appelée au clic sur le lien "login" ou "logout" :
+// si on est connecté, on supprime le token et on repasse en affichage visiteur
+// (sans recharger la page)/ Sinon, le lien va vers login.html
+function handleLoginLinkClick(event) {
+  if (isAuthenticated()) {
+    event.preventDefault(); //on reste sur la page
+    logout();
+    displayEditMode(false, handleLoginLinkClick);
+  }
+  // Sinon, on ne fait rien : le lien va rediriger vers login.html
 }
 
 async function init() {
+  displayEditMode(isAuthenticated(), handleLoginLinkClick);
+
   const apiCategories = await loadCategories();
 
   categoryState = createCategoryState([
@@ -32,8 +39,6 @@ async function init() {
   displayFilters(categoryState.all(), (categoryId) => {
     displayWorks(workState.fromCategory(categoryId));
   });
-
-  displayEditMode(isAuthenticated(), handleLogout);
 }
 
 init();
