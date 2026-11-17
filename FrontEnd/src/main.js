@@ -6,6 +6,7 @@ import { displayFilters } from "./ui/filter.js";
 import { createCategoryState } from "./models/categoryState.js";
 import { isAuthenticated, logout } from "./api/auth.js";
 import { displayEditMode } from "./ui/editMode.js";
+import { openModal } from "./ui/modal.js";
 
 let categoryState;
 let workState;
@@ -39,6 +40,8 @@ async function init() {
   displayFilters(categoryState.all(), (categoryId) => {
     displayWorks(workState.fromCategory(categoryId));
   });
+
+  // openModal();
 }
 
 init();

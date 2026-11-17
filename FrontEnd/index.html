@@ -20,40 +20,42 @@
   </head>
 
   <body>
-    
-  <div id="modal" class="modal">
-    <div class="modal-content" role="dialog" aria-modal="true">
-      <button id ="modal-back" class ="modal-back" aria-label="Retour"></button>
-      <button id="modal-close" class="modal-close" aria-label="Fermer"></button>
+    <div id="modal" class="modal" hidden>
+      <div class="modal-content" role="dialog" aria-modal="true">
+        <button class="modal-back-button" aria-label="Retour" hidden><-</button>
+        <button class="modal-close-button" aria-label="Fermer">X</button>
 
-      <!-- Vue 1 : liste des travaux -->
-      <div id="modal-gallery-view">
-        <h3>Galerie photo</h3>
-        <div id="modal-gallery" class="modal-gallery"></div>
-        <button id="modal-add" class="modal-add">Ajouter une photo</button>
+        <!-- Vue 1 : liste des travaux -->
+        <div id="modal-gallery-view">
+          <h3>Galerie photo</h3>
+          <div id="modal-gallery" class="modal-gallery"></div>
+          <button id="modal-add" class="modal-add">Ajouter une photo</button>
+        </div>
+
+        <div id="modal-form-view" hidden>
+          <h3>Ajout photo</h3>
+          <form id="add-work-form">
+            <input type="file" id="work-image" accept="image.png, image/jpeg" />
+
+            <label for="work-title">Titre</label>
+            <input type="text" id="work-title" />
+
+            <label for="work-category">Catégorie</label>
+            <select id="work-category"></select>
+
+            <button type="submit">Valider</button>
+          </form>
+        </div>
       </div>
+
+      <!-- Vue 2 : formulaire d'ajout de photo -->
     </div>
-
-     <!-- Vue 2 : formulaire d'ajout de photo -->
-      <div id="modal-form-view" hidden>
-        <h3>Ajout photo</h3>
-        <form id="add-work-form">
-          <input type="file" id="work-image" accept="image.png, image/jpeg"/>
-          <label for="work-title">Titre</label>
-          <input type="text" id="work-title" />
-          <label for="work-category">Catégorie</label>
-          <select id="work-category"></select>
-          <button type="submit">Valider</button>
-        </form>
-      </div>
-  </div>
-  </div>
-
 
     <div id="edit-banner" class="edit-banner" hidden>
       <i class="fa-regular fa-pen-to-square"></i>
       <p>Mode édition</p>
     </div>
+
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>

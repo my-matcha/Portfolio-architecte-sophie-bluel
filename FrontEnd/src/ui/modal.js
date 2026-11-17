@@ -1,14 +1,24 @@
 const modal = document.querySelector("#modal");
+const closeButton = modal.querySelector(".modal-close-button");
+
 const galleryView = document.querySelector("#modal-gallery-view");
 const formView = document.querySelector("#modal-form-view");
-const closeButton = document.querySelector("#modal-close-button");
 
 //  Affiche une vue (gallery ou form) dans la modale et masque l'autre
 // Le bouton retour n'apparaît que dans la vue form
 function showView(name) {
-  gallerView.hidden = name !== "gallery";
-  formView.hidden = name !== "form";
-  backButton.hidden = name !== "form";
+  switch (name) {
+    case "gallery":
+      galleryView.hidden = false;
+      closeButton.hidden = false;
+      formView.hidden = true;
+      break;
+    case "form":
+      galleryView.hidden = true;
+      closeButton.hidden = true;
+      formView.hidden = false;
+      break;
+  }
 }
 
 export function openModal() {
