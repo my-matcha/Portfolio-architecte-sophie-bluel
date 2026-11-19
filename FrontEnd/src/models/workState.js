@@ -8,5 +8,8 @@ export function createWorkState(works) {
       if (!category_id) return this.all();
       return works.filter((work) => work.category.id === category_id);
     },
+    remove: function (id) {
+      works = works.filter((work) => work.id !== id);
+    },
   };
 }

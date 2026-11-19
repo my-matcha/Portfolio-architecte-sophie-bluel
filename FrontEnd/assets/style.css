@@ -437,8 +437,7 @@ footer nav ul {
 .modal-gallery {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
-  margin: 2rem 0;
+  gap: 10px;
 }
 
 .modal-work {
@@ -448,6 +447,8 @@ footer nav ul {
 
 .modal-work img {
   width: 100%;
+  height: 102.57px;
+  object-fit: cover;
   display: block;
 }
 
@@ -456,9 +457,14 @@ footer nav ul {
   position: absolute;
   top: 5px;
   right: 5px;
-  background: none;
+  background: black;
+  color: white;
   border: none;
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
 }

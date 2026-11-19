@@ -33,3 +33,7 @@ export function logout() {
 export function isAuthenticated() {
   return localStorage.getItem(TOKEN_KEY) !== null;
 }
+
+export function getToken() {
+  return localStorage.getItem(TOKEN_KEY);
+}

@@ -1,12 +1,12 @@
 import { loadCategories } from "./api/category.js";
-import { loadWorks } from "./api/work.js";
 import { displayWorks } from "./ui/gallery.js";
 import { createWorkState } from "./models/workState.js";
 import { displayFilters } from "./ui/filter.js";
 import { createCategoryState } from "./models/categoryState.js";
 import { isAuthenticated, logout } from "./api/auth.js";
 import { displayEditMode } from "./ui/editMode.js";
-import { openModal } from "./ui/modal.js";
+import { openModal, displayModalWorks } from "./ui/modal.js";
+import { loadWorks, deleteWork } from "./api/work.js";
 
 let categoryState;
 let workState;
@@ -41,7 +41,23 @@ async function init() {
     displayWorks(workState.fromCategory(categoryId));
   });
 
-  // openModal();
+  const editButton = document.querySelector("#edit-button");
+  editButton.addEventListener("click", openModal);
+  displayModalWorks(workState.all(), handleDeleteWork);
+  openModal(); // Ouvre la modale au chargement de la page
+}
+
+async function handleDeleteWork(workId) {
+  try {
+    await deleteWork(workId);
+    workState.remove(workId);
+    displayWorks(workState.all());
+    displayModalWorks(workState.all(), handleDeleteWork);
+    displayWorks(workState.all());
+  } catch (error) {
+    console.error(error);
+    alert("La suppression du projet a échoué.");
+  }
 }
 
 init();
