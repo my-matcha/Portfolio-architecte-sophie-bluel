@@ -21,12 +21,12 @@ let workState;
 // si on est connecté, on supprime le token et on repasse en affichage visiteur
 // (sans recharger la page)/ Sinon, le lien va vers login.html
 function handleLoginLinkClick(event) {
-  if (isAuthenticated()) {
-    event.preventDefault(); //on reste sur la page
-    logout();
-    displayEditMode(false, handleLoginLinkClick);
-  }
-  // Sinon, on ne fait rien : le lien va rediriger vers login.html
+  // early return quand nous ne sommes pas authentifié
+  if (!isAuthenticated()) return;
+
+  event.preventDefault(); //on reste sur la page
+  logout();
+  displayEditMode(false, handleLoginLinkClick);
 }
 
 async function init() {
@@ -52,7 +52,6 @@ async function init() {
   const editButton = document.querySelector("#edit-button");
   editButton.addEventListener("click", openModal);
   displayModalWorks(workState.all(), handleDeleteWork);
-  openModal(); // Ouvre la modale au chargement de la page
 
   document
     .querySelector("#add-work-form")

@@ -8,8 +8,10 @@ const addButton = galleryView.querySelector("#modal-add");
 const form = formView.querySelector("#add-work-form");
 const imageInput = form.querySelector("#work-image");
 const preview = form.querySelector("#work-image-preview");
-const placeholder = form.querySelector("#photo-upload-placeholder");
+const placeholder = form.querySelector(".photo-upload-placeholder");
 const categorySelect = form.querySelector("#work-category");
+
+console.log(placeholder);
 
 //  Affiche une vue (gallery ou form) dans la modale et masque l'autre
 // Le bouton retour n'apparaît que dans la vue form
@@ -87,7 +89,7 @@ export function displayCategoryOptions(categories) {
 // Affiche l'aperçu de l'image sélectionnée dans le formulaire
 imageInput.addEventListener("change", () => {
   const file = imageInput.files[0];
-  if (file) return; // Si aucun fichier n'est sélectionné, on ne fait rien
+  if (!file) return; // Si aucun fichier n'est sélectionné, on ne fait rien
 
   preview.src = URL.createObjectURL(file);
   preview.hidden = false;

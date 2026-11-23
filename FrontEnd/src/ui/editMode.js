@@ -2,12 +2,11 @@
 // isEditMode : true pour afficher le mode édition, false pour le masquer.
 // onLogout : fonction à appeler quand l'utilisatrice se déconnecte (clic sur "logout").
 
-let onLogoutCallback = function() {}
+let onLogoutCallback = function () {};
 
 function onLogout(event) {
   event.preventDefault();
-  console.log('EVENEMENT CLICK SUR LOGOUT LINK')
-  onLogoutCallback();
+  onLogoutCallback(event);
 }
 
 export function displayEditMode(isEditMode, callback) {
@@ -20,16 +19,15 @@ export function displayEditMode(isEditMode, callback) {
 
   editBannerElement.hidden = !isEditMode;
   editButtonElement.hidden = !isEditMode;
-  
-  if (filterButtonsElement)
-    filterButtonsElement.hidden = isEditMode;
+
+  if (filterButtonsElement) filterButtonsElement.hidden = isEditMode;
 
   const loginLink = document.querySelector("#login-link");
 
   if (isEditMode) {
     loginLink.textContent = "logout";
-    
-    loginLink.removeEventListener("click", onLogout) // On évite que plusieurs évènements se lancent
+
+    loginLink.removeEventListener("click", onLogout); // On évite que plusieurs évènements se lancent
     loginLink.addEventListener("click", onLogout);
   } else {
     loginLink.textContent = "login";
