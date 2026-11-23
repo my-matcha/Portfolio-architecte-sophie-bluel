@@ -13,7 +13,7 @@ const categorySelect = form.querySelector("#work-category");
 
 //  Affiche une vue (gallery ou form) dans la modale et masque l'autre
 // Le bouton retour n'apparaît que dans la vue form
-function showView(name) {
+export function showView(name) {
   switch (name) {
     case "gallery":
       galleryView.hidden = false;

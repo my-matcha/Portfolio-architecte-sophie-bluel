@@ -18,3 +18,20 @@ export async function deleteWork(workId) {
     throw new Error("Erreur lors de la suppression du projet");
   }
 }
+
+export async function addWork(formData) {
+  const response = await fetch(`${BASE_URL}/works`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+      // pas de "Content-Type" ici car on envoie un FormData, le navigateur gère ça automatiquement
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Erreur lors de l'ajout du projet");
+  }
+
+  return response.json();
+}
