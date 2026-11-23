@@ -35,7 +35,26 @@
         <div id="modal-form-view" hidden>
           <h3>Ajout photo</h3>
           <form id="add-work-form">
-            <input type="file" id="work-image" accept="image.png, image/jpeg" />
+            <div class="photo-upload">
+              <div class="photo-upload-placeholder">
+                <i class="fa-solid fa-image"></i>
+                <label for="work-image" class="photo-upload-button"
+                  >+ Ajouter photo</label
+                >
+                <p>jpg, png : 4mo max</p>
+              </div>
+              <img
+                id="work-image-preview"
+                alt="Prévisualisation de l'image"
+                hidden
+              />
+              <input
+                type="file"
+                id="work-image"
+                accept="image/png, image/jpeg"
+                hidden
+              />
+            </div>
 
             <label for="work-title">Titre</label>
             <input type="text" id="work-title" />
