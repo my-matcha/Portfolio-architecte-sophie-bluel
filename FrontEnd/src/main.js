@@ -5,7 +5,11 @@ import { displayFilters } from "./ui/filter.js";
 import { createCategoryState } from "./models/categoryState.js";
 import { isAuthenticated, logout } from "./api/auth.js";
 import { displayEditMode } from "./ui/editMode.js";
-import { openModal, displayModalWorks } from "./ui/modal.js";
+import {
+  openModal,
+  displayModalWorks,
+  displayCategoryOptions,
+} from "./ui/modal.js";
 import { loadWorks, deleteWork } from "./api/work.js";
 
 let categoryState;
@@ -27,6 +31,8 @@ async function init() {
   displayEditMode(isAuthenticated(), handleLoginLinkClick);
 
   const apiCategories = await loadCategories();
+
+  displayCategoryOptions(apiCategories);
 
   categoryState = createCategoryState([
     { id: null, name: "Tous" },
@@ -56,7 +62,7 @@ async function handleDeleteWork(workId) {
     displayWorks(workState.all());
   } catch (error) {
     console.error(error);
-    alert("La suppression du projet a échoué.");
+    alert("La su.");
   }
 }
 
