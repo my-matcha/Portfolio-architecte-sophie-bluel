@@ -4,7 +4,7 @@ import { getToken } from "./auth.js";
 //Fabrique une erreur qui garde le code de la réponse (401, 404, 500...)
 function createRequestError(message, response) {
   const error = new Error(message);
-  error.response = response;
+  error.response = response.status;
   return error;
 }
 
