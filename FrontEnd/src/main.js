@@ -58,7 +58,19 @@ async function init() {
     .addEventListener("submit", handleAddWork); // On écoute la soumission du formulaire d'ajout de projet
 }
 
+function getErrorMessage(error, action) {
+  if (error.message.includes("NetworkError")) {
+    return "Votre session a expiré. Veuillez vous reconnecter.";
+  }
+  if (error.status) {
+    return "Le serveur a refusé la ${action}. Veuillez réessayer plus tard.";
+  }
+  return "Impossible de joindre le serveur.";
+}
+
 async function handleDeleteWork(workId) {
+  const deleteError = document.querySelector("#modal-error");
+
   try {
     await deleteWork(workId);
     workState.remove(workId);
@@ -67,8 +79,15 @@ async function handleDeleteWork(workId) {
     displayWorks(workState.all());
   } catch (error) {
     console.error(error);
-    alert("La suppression a échoué.");
+    deleteError.textContent = getErrorMessage(error, "la suppression");
+    deleteError.hidden = false;
   }
+}
+
+function showError(message) {
+  const errorMessage = document.querySelector("#add-work-error");
+  errorMessage.textContent = message;
+  errorMessage.hidden = false;
 }
 
 async function handleAddWork(event) {
@@ -76,19 +95,17 @@ async function handleAddWork(event) {
 
   const errorMessage = document.querySelector("#add-work-error");
   const image = document.querySelector("#work-image").files[0];
-  const title = document.querySelector("#work-title").value;
+  const title = document.querySelector("#work-title").value.trim(); // On enlève les espaces avant et après le titre
   const categoryId = document.querySelector("#work-category").value;
 
   // 1. Validation des champs du formulaire
   if (!image || !title || !categoryId) {
-    errorMessage.textContent = "Veuillez remplir tous les champs.";
-    errorMessage.hidden = false;
+    showError("Veuillez remplir tous les champs.");
     return;
   }
 
   if (image.size > 4 * 1024 * 1024) {
-    errorMessage.textContent = "L'image ne doit pas dépasser 4 Mo.";
-    errorMessage.hidden = false;
+    showError("L'image ne doit pas dépasser 4 Mo.");
     return;
   }
   errorMessage.hidden = true; // On cache le message d'erreur si tout est bon
@@ -111,9 +128,7 @@ async function handleAddWork(event) {
     showView("gallery"); // On revient à la vue galerie après l'ajout
   } catch (error) {
     console.error(error);
-    errorMessage.textContent =
-      "Erreur lors de l'ajout du projet. Veuillez réessayer.";
-    errorMessage.hidden = false;
+    showError(getErrorMessage(error, "l'ajout"));
   }
 }
 

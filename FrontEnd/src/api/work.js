@@ -1,6 +1,13 @@
 import BASE_URL from "./baseUrl.js";
 import { getToken } from "./auth.js";
 
+//Fabrique une erreur qui garde le code de la réponse (401, 404, 500...)
+function createRequestError(message, response) {
+  const error = new Error(message);
+  error.response = response;
+  return error;
+}
+
 export async function loadWorks() {
   const response = await fetch(`${BASE_URL}/works`);
   return response.json();
@@ -15,7 +22,10 @@ export async function deleteWork(workId) {
   });
 
   if (!response.ok) {
-    throw new Error("Erreur lors de la suppression du projet");
+    throw createRequestError(
+      "Erreur lors de la suppression du projet",
+      response,
+    );
   }
 }
 
@@ -30,7 +40,7 @@ export async function addWork(formData) {
   });
 
   if (!response.ok) {
-    throw new Error("Erreur lors de l'ajout du projet");
+    throw createRequestError("Erreur lors de l'ajout du projet", response);
   }
 
   return response.json();
