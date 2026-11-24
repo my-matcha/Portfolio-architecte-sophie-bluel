@@ -59,11 +59,11 @@ async function init() {
 }
 
 function getErrorMessage(error, action) {
-  if (error.message.includes("NetworkError")) {
+  if (error.status === 401) {
     return "Votre session a expiré. Veuillez vous reconnecter.";
   }
   if (error.status) {
-    return "Le serveur a refusé la ${action}. Veuillez réessayer plus tard.";
+    return `Le serveur a refusé la ${action}. Veuillez réessayer plus tard.`;
   }
   return "Impossible de joindre le serveur.";
 }
