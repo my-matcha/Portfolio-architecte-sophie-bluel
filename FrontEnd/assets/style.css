@@ -391,7 +391,7 @@ footer nav ul {
   cursor: pointer;
 }
 
-.edit-button hover {
+.edit-button:hover {
   text-decoration: underline;
 }
 
@@ -410,30 +410,41 @@ footer nav ul {
 .modal-content {
   position: relative;
   background-color: #fff;
-  width: min(630px, 90%);
+  width: 630px;
   padding: 2rem;
   border-radius: 10px;
 }
 
+.modal-content h3 {
+  font-family: "Work Sans";
+  font-weight: 400;
+  font-size: 26px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
 /*Boutons x et flèche gauche en haut de la boîte*/
-.modal-close,
-.modal-back {
+.modal-back-button {
   position: absolute;
-  top: 1rem;
+  left: 25px;
+  top: 25px;
+  font-size: 24px;
   background: none;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
 }
 
-.modal-close {
-  right: 1rem;
-}
-.modal-back {
-  left: 1rem;
+.modal-close-button {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-/*Grille des minaitures*/
+/*Galerie de la modale*/
 .modal-gallery {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -460,11 +471,34 @@ footer nav ul {
   background: black;
   color: white;
   border: none;
-  width: 20px;
-  height: 20px;
+  width: 9px;
+  height: 11px;
+  border-radius: 2px;
   cursor: pointer;
 }
 
 [hidden] {
   display: none !important;
+}
+
+/* Boutons verts et messages d'erreur */
+.modal-add,
+#add-work-form button {
+  display: block;
+  width: 237px;
+  height: 36px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 60px;
+  background-color: #1d6154;
+  color: white;
+  font-family: "Syne", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.form-error {
+  margin-bottom: 15px;
+  text-align: center;
+  color: red;
 }
